@@ -25,3 +25,4 @@ Run The [run.py](run.py) it wall run the App aftere create virtual environment a
 * The App wall install the highest resolution available.
 * The App wall skip the movie or the show episodes if it exist.
 * Some time at download filed do to server error.
+* The App add file named "continueDownload" In The Series or Movie Folder run it to continue Downloading Without Needed to enter The URL.
