@@ -106,6 +106,7 @@ class voduGeter:
             else:
                 movieName.pop()
         self.mediaName = " ".join(movieName)
+        self.file_path = self.mediaName + "/"
 
         self.createFolder()
 
@@ -117,7 +118,6 @@ class voduGeter:
         vidSrt = movie.attrs.get("data-srt")
         fileName = vidUrl.split('/')[-1]
 
-        self.file_path = self.mediaName + "/"
         self.getMp4File(mp4Url=vidUrl, file_Name=fileName)
         self.getSrtFile(srtUrl=vidSrt, file_Name=fileName)
         return print("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<GoodBye>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
