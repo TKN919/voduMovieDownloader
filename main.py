@@ -10,8 +10,9 @@ import sys
 
 
 class voduGeter:
-    def __init__(self, url_):
+    def __init__(self, url_,downLater="F"):
         self.url = url_
+        self.downLater=downLater
         self.mediaName = ""
         self.file_path = ""
         self.block_size = 16384
@@ -69,6 +70,12 @@ class voduGeter:
         epCount = len(epNamesTrs)
         self.file_path = self.mediaName + "/"
 
+        self.createFolder()
+        if self.downLater == "T":
+            downLater = input("Download Series Later (y):- ")
+            if downLater.lower() == 'y':
+                return print("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<GoodBye>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+        
         while True:
             try:
                 startPoint = int(input("\nStart From EP Num:- "))
@@ -109,6 +116,10 @@ class voduGeter:
         self.file_path = self.mediaName + "/"
 
         self.createFolder()
+        if self.downLater == "T":
+            downLater = input("Download Movie Later (y):- ")
+            if downLater.lower() == 'y':
+                return print("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<GoodBye>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
 
         for dataAtt in ["data-url1080", "data-url", "data-url360"]:
             vidUrl = movie.attrs.get(dataAtt)
@@ -200,7 +211,7 @@ def open_terminal(command, title):
         subprocess.Popen(full_command, shell=True)
 
 url="{urlsafe_b64encode(self.url.encode()).decode()}"
-open_terminal(f"main.py {{url}}", "Vodu Dow")
+open_terminal(f"main.py {{url}} ", "Vodu Dow")
 """)
         except Exception as e:
             print(e)
@@ -215,7 +226,7 @@ while True:
     match len(argv):
         case 1:
             url = input("Enter Vodu Url : ")
-            media = voduGeter(url_=url)
+            media = voduGeter(url_=url, downLater="T")
             media.run()
         case _:
             media = voduGeter(url_=urlsafe_b64decode(

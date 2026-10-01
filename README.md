@@ -18,8 +18,9 @@ Run The [main.py](main.py) or use the terminal in project's directory
 Run The [run.py](run.py) it wall run the App aftere create virtual environment and install the requirements if it not exeist, This wall happen at the firts time you run it after that it automatcle active the the VM and run the App.
 
 ## Usage
-1. If it was A Movie it wall create folder named after the movie and save it with .srt file in the folder.
-2. In case of Show it wall display the episodes to select the start point and save thame in folder named after the show.
+1. If you download the Media form [run.py](run.py) it will ask you IF You What To Download Later In Case Of Typing 'y' It will create folder with "continueDownload".
+2. If it was A Movie it wall create folder named after the movie and save it with .srt file in the folder.
+3. In case of Show it wall display the episodes to select the start point and save thame in folder named after the show.
 
 ## Notes
 * The App wall install the highest resolution available.
