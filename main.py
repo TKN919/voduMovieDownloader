@@ -45,8 +45,15 @@ class voduGeter:
                 return True
         return False
 
-    def createFolder(self):
+    def createFolder(self, for_):
         makedirs(self.mediaName, exist_ok=True)
+        image = self.soup.find(
+            "div", {"class": "col-lg-4" if for_ == "s" else "col-md-4"}).find("img", {"class": "img-responsive"})
+
+        image = requests.get(
+            f"https://movie.vodu.me/{image.get("src")}").content
+        with open(self.file_path+self.mediaName+".jpg", 'wb') as file:
+            file.write(image)
         self.createInfoFile()
 
     def getSeries(self):
@@ -68,11 +75,11 @@ class voduGeter:
         epCount = len(epNamesTrs)
         self.file_path = self.mediaName + "/"
 
-        self.createFolder()
         if self.downLater == "T":
             downLater = input("Download Series Later (y):- ")
             if downLater.lower() == 'y':
-                return print("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<GoodBye>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+                print("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<GoodBye>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+                self.createFolder(for_="s")
 
         for index, ep in enumerate(epNamesTrs):
             print(f"{index+1} - {ep.getText()}")
@@ -86,7 +93,7 @@ class voduGeter:
                 break
             except:
                 print("Enter Number Only")
-        self.createFolder()
+        self.createFolder(for_="s")
 
         for tr in trs[startPoint-1:]:
             for dataAtt in ["data-url1080", "data-url", "data-url360"]:
@@ -115,17 +122,17 @@ class voduGeter:
         self.mediaName = " ".join(movieName)
         self.file_path = self.mediaName + "/"
 
-        self.createFolder()
         if self.downLater == "T":
             downLater = input("Download Movie Later (y):- ")
             if downLater.lower() == 'y':
-                return print("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<GoodBye>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+                print("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<GoodBye>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+                return self.createFolder(for_="m")
 
         for dataAtt in ["data-url1080", "data-url", "data-url360"]:
             vidUrl = movie.attrs.get(dataAtt)
             if vidUrl:
                 break
-
+        self.createFolder(for_="m")
         vidSrt = movie.attrs.get("data-srt")
         fileName = vidUrl.split('/')[-1]
 
