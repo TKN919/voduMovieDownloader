@@ -10,9 +10,9 @@ import sys
 
 
 class voduGeter:
-    def __init__(self, url_,downLater="F"):
+    def __init__(self, url_, downLater="F"):
         self.url = url_
-        self.downLater=downLater
+        self.downLater = downLater
         self.mediaName = ""
         self.file_path = ""
         self.block_size = 16384
@@ -53,8 +53,6 @@ class voduGeter:
         trs = self.series.find_all("a", {"class": "btn btn-success play"})
         epNamesTrs = self.series.find_all(
             "div", {"class": "col-md-7 col-xs-12 col-sm-8"})
-        for index, ep in enumerate(epNamesTrs):
-            print(f"{index+1} - {ep.getText()}")
 
         seriesName = self.soup.find(
             "div", {"class": "col-lg-5"}).find("h1").getText()
@@ -75,7 +73,9 @@ class voduGeter:
             downLater = input("Download Series Later (y):- ")
             if downLater.lower() == 'y':
                 return print("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<GoodBye>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-        
+
+        for index, ep in enumerate(epNamesTrs):
+            print(f"{index+1} - {ep.getText()}")
         while True:
             try:
                 startPoint = int(input("\nStart From EP Num:- "))
